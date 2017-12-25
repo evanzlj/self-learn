@@ -9,7 +9,7 @@ function _quickSort(arr, l, r) {
   var i = partition(arr, l, r);
   _quickSort(arr, l, i-1)
   _quickSort(arr, i+1, r);
-
+  return arr
 }
 function partition(arr, l, r) {
   var temp = arr[l];
@@ -22,3 +22,4 @@ function partition(arr, l, r) {
   [arr[l], arr[j]] = [arr[j], arr[i]]
   return j;
 }
+console.log(quickSort([3123,4123,44,22,13,4]))
