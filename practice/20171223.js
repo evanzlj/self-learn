@@ -166,7 +166,7 @@ function getSumArr(arr, m, n, sum) {
 }
 
 var narr = []
-function getSumArrls(arr, m, n, sum) {
+function getSumArrls(arr, n, sum) {
   if (n <= 0 || sum <= 0) {
     return
   }
@@ -185,11 +185,12 @@ function getSumArrls(arr, m, n, sum) {
   narr.pop();
   getSumArrls(sum, n - 1)
 }
-
+getSumArrls(narr, 100, 27)
+console.log(narr)
 var arr = [1,2,4,3,5,7,6,8,9,10]
 var n = 3;
 var sum = 23
-console.log(getSumArr(arr, arr.length, n, sum))
+// console.log(getSumArr(arr, arr.length, n, sum))
 
 // 柯里化题目 add()()()
 function curry(fn) {
