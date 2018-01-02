@@ -164,3 +164,64 @@ function isFunc(fn) {
 function isThenable(pro) {
   return pro && isFunc(pro.then)
 }
+
+/**
+ * 01背包
+ * @param {array} w 重量集合
+ * @param {array} v 价值集合
+ * @param {number} W 总重量
+ * @param {number} n 多少个数
+ * @return {array}
+ ***/
+function bags01(w, v, W, n) {
+  // 声明指针
+  var i,
+      j,
+      a,
+      b,
+      arr = [];
+  for (i = 0; i <= n; i++) {
+    arr[i] = []
+  }
+  for (i = 0; i <= n; i++) {
+    for (j = 0; j <= W; j++) {
+      if (j === 0 || i === 0) {
+        arr[i][j] = 0
+      }
+      else if (w[i - 1] <= W) {
+        arr[i][j] = v[i - 1] + arr[i - 1][W - j]
+      }
+      else {
+        a = arr[i][j - 1];
+        b = arr[i - 1][j];
+        arr[i][j] = a > b ? a: b;
+      }
+    }
+  }
+  return findValues(n, w, arr, W)
+}
+/**
+ * 寻找背包的组合
+ * @param {number} n 个数
+ * @param {array} w 重量集合
+ * @param {array} arr 排列好的表格
+ * @param {number} W 总重量
+ * @return {array}
+ **/
+function findValues(n, w, arr, W) {
+  var i = n,
+      j = W,
+      result = [];
+  while (i && j) {
+    if (arr[i][j] > arr[i-1][j]) {
+      result.push(i)
+      i--;
+      j = W - j;
+    }
+    else {
+      i--;
+      j--;
+    }
+  }
+  return result
+}

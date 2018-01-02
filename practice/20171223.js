@@ -166,30 +166,28 @@ function getSumArr(arr, m, n, sum) {
 }
 
 var narr = []
-function getSumArrls(arr, n, sum) {
+function getSumArrls(n, sum) {
   if (n <= 0 || sum <= 0) {
     return
   }
   if (sum === n) {
-    arr.reverse()
-    if (arr === []) {
-      console.log(n)
+    narr.reverse()
+    for (var i = 0; i < narr.length; i ++) {
+      narr.push(i)
     }
-    else {
-      console.log(n, '+', arr.join('+'))
-    }
+    narr.push(i)
     narr.reverse()
   }
-  narr.push(n)
+  narr.unshift(n)
   getSumArrls(sum - n, n - 1)
-  narr.pop();
+  // narr.();
   getSumArrls(sum, n - 1)
 }
-getSumArrls(narr, 100, 27)
-console.log(narr)
-var arr = [1,2,4,3,5,7,6,8,9,10]
-var n = 3;
-var sum = 23
+// getSumArrls(3, 27)
+// console.log(narr)
+// var arr = [1,2,4,3,5,7,6,8,9,10]
+// var n = 3;
+// var sum = 23
 // console.log(getSumArr(arr, arr.length, n, sum))
 
 // 柯里化题目 add()()()
@@ -209,7 +207,6 @@ function curry(fn) {
   return cb
 }
 function add() {
-  var arr = [].slice.call(arguments);
   var result = 0;
   arr.map(item => {
     if (arr)
@@ -218,9 +215,59 @@ function add() {
   return result
 }
 
+var arr = [].slice.call(arguments);
 // 反转二叉树
 // 反转单链表
 // 寻找单链表中间点
 // Promise手写
 // 观察者模式
 //
+
+// var ls = [];
+// var rea = [];
+// function getNM(s, n) {
+//     if (n <= 0 || s <= 0) {
+//       return
+//     }
+//     if (s == n) {
+//       rea[rea.length] = [n]
+//       for (let i of ls) {
+//         rea[rea.length - 1].push(i)
+//       }
+//     }
+//     ls.unshift(n)
+//     getNM(s - n, n - 1)
+//     ls.shift()
+//     getNM(s, n - 1)
+// }
+// function getK(k) {
+//   return ls.filter(arr => arr.length == k)
+// }
+// getNM(10,15)
+// console.log(getK(2))
+var ls = [];
+var rea = [];
+function getNM(s, n, k, m) {
+    if (n <= 0 || s <= 0 || k <= 0) {
+      return
+    }
+    if (s == n) {
+      rea[rea.length] = [n]
+      for (let i of ls) {
+        rea[rea.length - 1].push(i)
+      }
+      if (m !== rea[rea.length-1].length) {
+        rea.pop()
+      }
+    }
+    ls.unshift(n)
+    getNM(s - n, n - 1, k - 1, m)
+    ls.shift()
+    getNM(s, n - 1, k, m)
+}
+// function getK(k) {
+//   return ls.filter(arr => arr.length == k)
+// }
+getNM(10,15,3,3)
+// console.log(getK(2))
+console.log(rea)
