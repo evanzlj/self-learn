@@ -18,28 +18,28 @@
 // 执行顺序不固定的
 //  2 7 6
 //  2 6 7
-// setImmediate(function() {
-//   console.log(2)
-//
-//   setTimeout(function() {
-//     console.log(6)
-//   },0)
-//
-//   setImmediate(function() {
-//     console.log(7)
-//   })
-// })
+setImmediate(function() {
+  console.log(2)
+
+  setTimeout(function() {
+    console.log(6)
+  },0)
+
+  setImmediate(function() {
+    console.log(7)
+  })
+})
 var start = Date.now()
 
-setImmediate(function() {
-  console.log(9)
-})
-
-
-setTimeout(function() {
-  console.log(8)
-  console.log(start - Date.now())
-},0)
+// fs.readFileAsync()
+// setImmediate(function() {
+//   console.log(9)
+// })
+//
+// setTimeout(function() {
+//   console.log(8)
+//   console.log(start - Date.now())
+// },0)
 //
 // new Promise(function(res) {
 //   console.log(4)
@@ -47,3 +47,5 @@ setTimeout(function() {
 // }).then(function(v) {
 //   console.log(v)
 // })
+
+// 32.5W
