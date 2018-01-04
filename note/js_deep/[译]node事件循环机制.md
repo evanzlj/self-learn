@@ -4,7 +4,7 @@
 
 ## 什么是事件循环？
 
-事件循环是在面对单线程的javascript编程语言时，实现Node.js非阻塞I/O的核心机制。尽可能的将操作安排到系统内核。
+事件循环是Node.js面对单线程的javascript编程语言时，实现非阻塞I/O的核心机制。尽可能的将操作安排到系统多核心上。
 
 由于现代的内核都是多线程的，他们可以在后台处理多个操作的实施。当任何一个操作完成，这个内核就会通知Node.js，把对应的回调可能扔到poll队列中等待执行。我们会在下面的内容中去解释这块东东。
 
@@ -272,7 +272,47 @@ server.listen(8080);
 server.on('listening', () => {});
 ```
 
-之前说过listen()运行在事件循环开始之前，但是listening回调被放在了setImmediate()中(译者注:这个地方有误，listening其实在process.nextTick里)。除非传入主机名，绑定端口的操作才会立刻执行。因为事件循环开始时，一定是在poll阶段的，那样的话，在listening回调触发之前，connection回调有可能被触发。
+之前说过listen()运行在事件循环开始之前，但是listening回调被放在了setImmediate()中(译者注:这个地方有误，listening其实在process.nextTick里)。除非传入主机名，绑定端口的操作才会立刻执行。因为事件循环开始时，一定是在poll阶段的，那样的话，在listening回调触发之前，connection回调有机会被触发。(译者注:connection也是在poll阶段进行的。)
+
+另一个例子是在继承自EventEmitter的构造函数中调用一个event:
+
+```javascript
+const EventEmitter = require('events');
+const util = require('util');
+
+function MyEmitter() {
+  EventEmitter.call(this);
+  this.emit('event');
+}
+util.inherits(MyEmitter, EventEmitter);
+
+const myEmitter = new MyEmitter();
+myEmitter.on('event', () => {
+  console.log('an event occurred!');
+});
+```
+
+实际上你并不能从构造函数中发出event，因为但没有执行到分配给event回调的时候。所以如果想要在构造函数内部调用event，可以使用process.nextTick()设置一个回调去调用event:
+
+```javascript
+const EventEmitter = require('events');
+const util = require('util');
+
+function MyEmitter() {
+  EventEmitter.call(this);
+
+  // 一旦handler被设置后，使用nextTick发射事件
+  process.nextTick(() => {
+    this.emit('event');
+  });
+}
+util.inherits(MyEmitter, EventEmitter);
+
+const myEmitter = new MyEmitter();
+myEmitter.on('event', () => {
+  console.log('an event occurred!');
+});
+```
 
 注解：
 
