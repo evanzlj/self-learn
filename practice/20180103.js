@@ -41,8 +41,29 @@ function bags01(N, V, C, W) {
       && W instanceof Array){
     throw new Error('Arguments must be number / number / array /array')
   }
-  let arr = [];
-  for () {
-
+  let arr = [], i, j, a, b;
+  for (i = 0; i <= N; i++) {
+    arr[i] = []
   }
+  for (i = 0; i <= N; i++) {
+    for (j = 0; j <= V; j++) {
+      if (i === 0 || j === 0) {
+        arr[i][j] = 0
+      }
+      else if (C[i - 1] <= V) {
+        arr[i][j] = arr[i - 1][V - C[i - 1]] + W[i - 1]
+      }
+      else {
+        a = arr[i - 1][j];
+        b = arr[i][j - 1];
+        arr[i][j] = a > b? a: b;
+      }
+    }
+  }
+  return arr[N][V];
 }
+
+/**
+ * 背包九讲之
+ *
+ **/
