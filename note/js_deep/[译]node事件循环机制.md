@@ -1,6 +1,6 @@
 # Nodejs事件循环(Event Loop)，定时器(Timers)以及process.nextTck()
 
-原文地址为:(The Node.js Event Loop, Timers, and process.nextTick())[https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/]
+原文地址为:[The Node.js Event Loop, Timers, and process.nextTick()](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/)
 
 ## 什么是事件循环？
 
@@ -79,7 +79,7 @@ someAsyncOperation(() => {
 
 当事件循环进入到poll阶段时，还是一个空的poll队列(fs.readFile()还没有能够完成)，所以poll队列会等待一段时间直到最快的那个完成。当95ms之后，fs.readFile()结束了读取文件的操作，而他的回调函数被加入到poll队列中执行。当这个fs的回调函数结束后，poll队列清空，事件循环会去查看Timers队列中最新的定时器(timer)回调(<a href="#sp2">注2</a>)，然后去执行它。在这个例子中，你会发现从定时器被设置到他的回调被执行，这个过程共105毫秒。
 
-**NOTE:为了预防poll阶段一直占用事件循环，(libuv)[http://libuv.org](<a href="#sp3">注3</a>)也有最大的执行上限(上限数取决于操作系统)**
+**NOTE:为了预防poll阶段一直占用事件循环，[libuv](http://libuv.org)(<a href="#sp3">注3</a>)也有最大的执行上限(上限数取决于操作系统)**
 
 ### I/O callbacks
 
@@ -316,7 +316,7 @@ myEmitter.on('event', () => {
 
 注解：
 
-<div id="sp1">1.(HTML5标准规范为4ms，即setTimeout(fn, n) {n < 4? (n = 4) : n}，可参考setTimeout method 定义的第5条)[https://www.w3.org/TR/2011/WD-html5-20110405/timers.html#timers]。</div>
+<div id="sp1"><a href="https://www.w3.org/TR/2011/WD-html5-20110405/timers.html#timers">1.HTML5标准规范为4ms，即setTimeout(fn, n) {n < 4? (n = 4) : n}，可参考setTimeout method 定义的第5条。</a></div>
 
 <div id="sp2">2.这里的回调是指，timer到达设定时间后，会将自身的回调压入timers队列中等待。</div>
 
