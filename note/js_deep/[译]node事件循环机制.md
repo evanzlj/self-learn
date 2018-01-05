@@ -4,13 +4,13 @@
 
 ## 什么是事件循环？
 
-事件循环是Node.js面对单线程的javascript编程语言时，实现非阻塞I/O的核心机制。尽可能的将操作安排到系统多核心上。
+事件循环是Node.js面对单线程的javascript编程语言时，实现非阻塞I/O的核心机制。尽可能的将操作安排到系统内核上。
 
 由于现代的内核都是多线程的，他们可以在后台处理多个操作的实施。当任何一个操作完成，这个内核就会通知Node.js，把对应的回调可能扔到poll队列中等待执行。我们会在下面的内容中去解释这块东东。
 
 ## 阐述事件循环
 
-当Node.js启动时，他就会初始化事件循环，执行输入script内容，包括异步API调用、分配定时器或者调用process.nextTick()，然后开始执行事件循环。
+当Node.js启动时，他就会初始化事件循环并执行脚本的内容，包括异步API调用、分配定时器或者调用process.nextTick()，然后开始执行事件循环。
 
 接下来的图展示了一个简单描述了Event Loop的执行顺序：
 
@@ -26,7 +26,7 @@
 
 ps:有点绕，其实就是定时器执行时，可以产生新定时器和新的io事件。io事件执行时，也可以加入新的io操作。
 
-**NOTE:在windows和Unix/Linux中，实现可能由些许不同，对这个规范来说并不重要。最重要的是，这儿有7/8个步骤，而我们关心的是node.js使用的那些步骤。**
+**NOTE:在windows和Unix/Linux中，实现可能有些许不同，对这个规范来说并不重要。最重要的是，这个过程有7/8个步骤，而我们关心的是node.js使用的那些步骤。**
 
 ## 阶段概述
 
@@ -37,7 +37,7 @@ ps:有点绕，其实就是定时器执行时，可以产生新定时器和新�
 - check:setImmediate的回调函数在这里被调用
 - close callbacks:例如 socket.on('close', ...)
 
-在运行每次事件循环时，Node.js会查看是否在等待任何异步操作或者定时器，如果什么也没有的话，就会快速停下本次事件循环。
+在运行事件循环时，Node.js会查看是否在等待任何异步操作或者定时器，并且在没有任何任务的情况下，将会快速停下本次事件循环。
 
 ## 阶段详解
 
@@ -316,8 +316,6 @@ myEmitter.on('event', () => {
 
 注解：
 
-<div id="sp1"><a href="https://www.w3.org/TR/2011/WD-html5-20110405/timers.html#timers">1.HTML5标准规范为4ms，即setTimeout(fn, n) {n < 4? (n = 4) : n}，可参考setTimeout method 定义的第5条。</a></div>
-
-<div id="sp2">2.这里的回调是指，timer到达设定时间后，会将自身的回调压入timers队列中等待。</div>
-
-<div id="sp3">3.libuv是实现node.js异步操作的底层C语言依赖包</div>
+<span id="sp1">1.HTML5标准规范为4ms，即setTimeout(fn, n) {n < 4? (n = 4) : n}，可参考setTimeout method 定义的第5条。</span>
+<span id="sp2">2.这里的回调是指，timer到达设定时间后，会将自身的回调压入timers队列中等待。</span>
+<span id="sp3">3.libuv是实现node.js异步操作的底层C语言依赖包</span>
