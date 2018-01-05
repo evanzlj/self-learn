@@ -316,7 +316,7 @@ myEmitter.on('event', () => {
 
 注解：
 
-<span id="sp1">1.HTML5标准规范为4ms，即setTimeout(fn, n) {n < 4? (n = 4) : n}，可参考setTimeout method 定义的第5条。</span>
+<span id="sp1">1.HTML5标准规范为4ms，即setTimeout(fn, n) {n < 4? (n = 4) : n}，<a href="https://www.w3.org/TR/2011/WD-html5-20110405/timers.html#timers">可参考setTimeout method 定义的第5条。</a></span>
   
 <span id="sp2">2.这里的回调是指，timer到达设定时间后，会将自身的回调压入timers队列中等待。</span>
 
