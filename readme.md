@@ -17,11 +17,16 @@
 
 ## js执行机制探索
 
+### 事件循环机制
+
+根据宿主环境的不同，事件循环机制的实施也不一样，我会从node和浏览器这两个角度去分析事件循环的机制
+
 1.<a href="https://github.com/evanzlj/self-learn/blob/dev/note/js_deep/%5B%E8%AF%91%5Dnode%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6.md">[译]node事件循环机制</a>
 
 2.<a href="https://github.com/evanzlj/self-learn/blob/dev/note/js_deep/%E7%90%86%E8%A7%A3node%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6.md">理解node事件循环机制</a>
 
-<!-- ## http探索 -->
+<!-- ### 执行过程分析 -->
+<!-- ### 异步API分析 -->
 
 
 我是红烧肉，每个人的思维方式不同，希望求同存异，共同进步~，如果有不对之处，也请多多指教。
