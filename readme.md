@@ -23,7 +23,7 @@
 
 1.<a href="https://github.com/evanzlj/self-learn/blob/dev/note/js_deep/%5B%E8%AF%91%5Dnode%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6.md">[译]node事件循环机制</a>
 
-2.<a href="https://github.com/evanzlj/self-learn/blob/dev/note/js_deep/%E7%90%86%E8%A7%A3node%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6.md">理解node事件循环机制</a>
+2.<a href="https://github.com/evanzlj/self-learn/blob/dev/note/js_deep/%E7%90%86%E8%A7%A3node%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.md">理解node事件循环机制</a>
 
 <!-- ### 执行过程分析 -->
 <!-- ### 异步API分析 -->
