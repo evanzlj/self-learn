@@ -20,6 +20,7 @@
 在被坑，被面n次后，下定决心看看js的原理，所以写了个很大的题目，估计2年内才能完成，挖坑埋自己~
 
 1.<a href="https://github.com/evanzlj/self-learn/blob/dev/note/js_deep/%5B%E8%AF%91%5Dnode%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6.md">[译]node事件循环机制</a>
+
 2.<a href="https://github.com/evanzlj/self-learn/blob/dev/note/js_deep/%E7%90%86%E8%A7%A3node%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6.md">理解node事件循环机制</a>
 
 <!-- ## http探索 -->

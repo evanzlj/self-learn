@@ -216,7 +216,7 @@ someAsyncApiCall(() => {
 bar = 1;
 ```
 
-用户定义了someAsyncApiCall()一个有异步标志的函数，但是它实际的操作时同步的。因为someAysncApiCall()实际上没有做什么异步操作，所以当它被调用时，提供给它的回调函数callback，会和someAysncApiCall()在事件循环同一阶段被调用。所以结果就是，由于callback被调用时，整体代码没跑完，callback输出bar的值为undefined。
+用户定义了someAsyncApiCall()一个有异步标志的函数，但是它实际的操作是同步的。因为someAysncApiCall()实际上没有做什么异步操作，所以当它被调用时，提供给它的回调函数callback，会和someAysncApiCall()在事件循环同一阶段被调用。所以结果就是，由于callback被调用时，整体代码没跑完，callback输出bar的值为undefined。
 
 通过将回调函数放到process.nextTick()中，剩余的代码将会跑完，无论什么变量，同步函数操作，都会在回调函数前完成。这是不允许事件循环进入其他阶段的好处(译者注:就是将代码真正异步化，又不影响事件循环的后续执行)。在事件循环继续之前，它会向用户上报错误。这是上个例子在使用process.nextTick()后的代码:
 
