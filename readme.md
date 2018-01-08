@@ -15,9 +15,7 @@
 
 <!--1.获取两个升序数组中第N大的值-->
 
-## js原理探究之路
-
-在被坑，被面n次后，下定决心看看js的原理，所以写了个很大的题目，估计2年内才能完成，挖坑埋自己~
+## js执行机制探索
 
 1.<a href="https://github.com/evanzlj/self-learn/blob/dev/note/js_deep/%5B%E8%AF%91%5Dnode%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6.md">[译]node事件循环机制</a>
 
