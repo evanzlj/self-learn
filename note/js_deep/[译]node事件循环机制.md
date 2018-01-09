@@ -2,17 +2,17 @@
 
 原文地址为:[The Node.js Event Loop, Timers, and process.nextTick()](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/)
 
-**翻译内容部分是译者补充，大概占5%，如果有不对的地方，欢迎指出~ 邮箱 linjun911@gmail.com~**
+**翻译内容部分是译者补充，大概占8%，如果有不对的地方，欢迎指出~ 邮箱 linjun911@gmail.com~**
 
 ## 什么是事件循环？
 
-事件循环是Node.js为单线程的javascript编程语言实现非阻塞I/O的核心机制。它会尽可能的将阻塞操作安排到系统内核上。
+事件循环是Node.js为单线程的JavaScript编程语言实现非阻塞I/O的核心机制。它会尽可能的将操作安排到系统内核上运行。
 
-由于现代的内核都是多线程的，他们可以在后台处理多个操作的实施。当任何一个操作完成，这个内核就会通知Node.js，可能会加入到poll阶段的队列中等待执行。我们会在下面的内容中去解释这块东东。
+由于现代的内核都是多线程的，他们可以在后台处理多个操作的实施。当任何一个操作完成，内核就会利用消息队列通知Node.js，这个操作就可能会加入到poll阶段的队列中等待执行。我们会在下面的内容中去解释这块东东。
 
 ## 阐述事件循环
 
-当Node.js启动时，他就会初始化事件循环并执行脚本的内容，包括异步API调用、分配定时器或者调用process.nextTick()加入TICK QUEUE，同步代码执行之后开始执行事件循环。
+当Node.js启动时，它就会初始化事件循环并执行脚本的内容，包括异步API调用、分配定时器或者将process.nextTick()的回调加入TICK QUEUE，在同步代码执行之后就会开始执行事件循环。
 
 接下来的图展示了一个简单描述了Event Loop的执行顺序：
 
@@ -33,7 +33,7 @@ ps:有点绕，其实就是定时器执行时，可以产生新定时器和新�
 ## 阶段概述
 
 - timers:这个阶段会去执行setTimeout/setInterval完成后被加入的回调函数
-- I/O回调:执行几乎除了关闭类回调、定时器计划的回调、setImmediate的回调外的所有回调函数。(译者注:我觉得这个地方有分歧，难道fs调用不算回调么，竟然是在poll阶段执行的。)
+- I/O回调:执行几乎除了关闭类回调、定时器计划的回调、setImmediate的回调外的所有回调函数。(译者注:这里的回调是指对异步事件的监听函数，而非fs.readFile(fn)中的fn。)
 - idle,prepare:仅供node.js内部使用
 - poll:收取新的I/O事件，当某些情况时node进程会阻塞在这里
 - check:setImmediate的回调函数在这里被调用
@@ -185,7 +185,7 @@ timeout
 
 ### 为什么这种情况会被node.js容许呢？(译者注:代指上述的process.nextTick特性，可能阻塞事件循环)
 
-为什么在node.js里面会有process.nextTick这样的东西呢？一部分原因是整体的设计思路，无论哪里一个API应该一直是异步处理，即便它实际上并不需要这么做。下面一个示例片段:
+为什么在node.js里面会有process.nextTick这样的东西呢？主要原因是整体的设计思路，无论什么API，它的回调都应该是异步处理，即便它实际上并不需要这么做。下面一个示例片段:
 
 ```javascript
 function apiCall(arg, callback) {
