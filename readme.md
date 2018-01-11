@@ -8,6 +8,10 @@
 
 1.<a href="https://github.com/evanzlj/self-learn/blob/dev/note/algorithms/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97.md">最长公共子序列</a>
 
+## 数据结构
+
+1.<>平衡二叉树
+
 <!-- ## 面试成长
 
 从面白到面霸要经历怎样的过程~，从面试小问题着手，一点点解析我们的晋级之路，
