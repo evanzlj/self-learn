@@ -225,7 +225,46 @@ class AVL extends BTree {
     }
   }
   remove (key) {
-
+    if (!this.head) {
+      return
+    }
+    this.head = _remove(this.head, key)
+    function min(node) {
+      let cur = node
+      while (cur && cur.left) {
+        cur = cur.left
+      }
+      return cur
+    }
+    function _remove(node, key) {
+      if (!node) {
+        return null
+      }
+      if (node.key > key) {
+        node.left = _remove(node.left, key)
+      }
+      else if (node.key < key) {
+        node.right = _remove(node.right, key)
+      }
+      else {
+        if (node.right === null && node.left === null) {
+          node = null
+        }
+        else if (node.right === null) {
+          node = node.left
+        }
+        else if (node.left === null) {
+          node = node.right
+        }
+        else {
+          let temp = min(node.right)
+          node = _remove(node,  temp.key)
+          node.key = temp.key
+        }
+      }
+      node = AVL.blance(node, key)
+      return node
+    }
   }
 }
 /**
