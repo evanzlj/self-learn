@@ -62,8 +62,3 @@ function bags01(N, V, C, W) {
   }
   return arr[N][V];
 }
-
-/**
- * 背包九讲之
- *
- **/
