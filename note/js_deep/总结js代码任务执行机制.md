@@ -71,17 +71,26 @@ $ immediate
 这段代码的运行环境9成是node.js下。(process.nextTick属于node.js下的API)
 
 1.node启动一个主线任务 Run Script ，运行js代码，将执行内容放到JS执行栈中；
-2.执行到setTimeout，会将它加入到node初始化的Timer容器中计时等待，虽然DELAY为0，但Timer内部默认最少为1；
-3.执行到setImmediate，将它放到事件循环中的check队列中等待；
-4.执行到promise.then()，将它派发的微观任务放入到微观任务队列中；
-5.执行到process.nextTick()，将它放入到TickQueue中，该队列会在任务结束前，js执行栈为空时，先于微观任务，直接顺序执行；
-6.主线任务 Run Script 处于结束阶段，执行栈清空，TickQueue 中的 Tick callback 首先加入执行栈执行，输出 process.nextTick；
-7.Tick callback 出栈，执行栈再次为空，开始执行微观任务队列中的任务，promise.then callback 进栈执行，输出 promise.then；
-8.promise.then callback 出栈，微观任务队列为空，而另一方面Timer容器中计时早已到达最少延迟时间，setTimeout(fn, 0)进入到事件循环的 timers 阶段队列中；
-9.事件循环按阶段开始运行，首先进入到了 timers 阶段，setTimeout callback 进栈执行，输出 timeout ；
-10.完毕后，事件循环继续进行，直到 check 阶段，开始执行 check 阶段的任务队列，setImmediate callback 进栈执行，输出 immediate;
-11.完毕后，js执行栈清空，事件循环停止。
 
+2.执行到setTimeout，会将它加入到node初始化的Timer容器中计时等待，虽然DELAY为0，但Timer内部默认最少为1；
+
+3.执行到setImmediate，将它放到事件循环中的check队列中等待；
+
+4.执行到promise.then()，将它派发的微观任务放入到微观任务队列中；
+
+5.执行到process.nextTick()，将它放入到TickQueue中，该队列会在任务结束前，js执行栈为空时，先于微观任务，直接顺序执行；
+
+6.主线任务 Run Script 处于结束阶段，执行栈清空，TickQueue 中的 Tick callback 首先加入执行栈执行，输出 process.nextTick；
+
+7.Tick callback 出栈，执行栈再次为空，开始执行微观任务队列中的任务，promise.then callback 进栈执行，输出 promise.then；
+
+8.promise.then callback 出栈，微观任务队列为空，而另一方面Timer容器中计时早已到达最少延迟时间，setTimeout(fn, 0)进入到事件循环的 timers 阶段队列中；
+
+9.事件循环按阶段开始运行，首先进入到了 timers 阶段，setTimeout callback 进栈执行，输出 timeout ；
+
+10.完毕后，事件循环继续进行，直到 check 阶段，开始执行 check 阶段的任务队列，setImmediate callback 进栈执行，输出 immediate;
+
+11.完毕后，js执行栈清空，事件循环停止；
 
 而实际上，在 Run script 任务结束的阶段，任务的分布是这样的:
 
