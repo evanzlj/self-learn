@@ -8,9 +8,9 @@
 
 1.<a href="https://github.com/evanzlj/self-learn/blob/dev/note/algorithms/%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E5%BA%8F%E5%88%97.md">最长公共子序列</a>
 
-## 数据结构
+<!-- ## 数据结构 -->
 
-1.<>平衡二叉树
+<!-- 1.平衡二叉树 -->
 
 <!-- ## 面试成长
 
@@ -29,6 +29,9 @@
 
 2.<a href="https://github.com/evanzlj/self-learn/blob/dev/note/js_deep/%E7%90%86%E8%A7%A3node%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF.md">理解node事件循环机制</a>
 
+3.<a href="https://github.com/evanzlj/self-learn/blob/dev/note/js_deep/%5B%E8%AF%91%5D%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97%E3%80%81%E5%BE%AE%E8%A7%82%E4%BB%BB%E5%8A%A1%E9%98%9F%E5%88%97%E5%8F%8A%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6.md">[译]任务队列、微观任务队列及执行机制</a>
+
+4.<a href="https://github.com/evanzlj/self-learn/blob/dev/note/js_deep/%E6%80%BB%E7%BB%93js%E4%BB%A3%E7%A0%81%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6.md">总结js代码任务执行机制</a>
 <!-- ### 执行过程分析 -->
 <!-- ### 异步API分析 -->
 
