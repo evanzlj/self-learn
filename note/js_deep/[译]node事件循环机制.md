@@ -322,6 +322,6 @@ myEmitter.on('event', () => {
 
 <span id="sp2">2.这里的回调是指，timer到达设定时间后，会将自身的回调压入timers队列中等待。</span>
 
-<span id="sp3">3.libuv是实现node.js异步操作的底层C语言依赖包</span>
+<span id="sp3">3.[libuv是实现node.js异步操作的底层C语言依赖包](https://github.com/libuv/libuv)</span>
 
 4.为什么不使用新的名称呢？替代这两个名称，来达到渐进式的修复
